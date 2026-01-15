@@ -28,7 +28,7 @@ See <a href="/GPIO_Pins" class="wikilink" title="GPIO Pins">GPIO Pins</a>
 ## 90010000 - Fast timer
 
 The same interface as 900C0000/900D0000, see
-<a href="#900D0000_-_Second_timer" class="wikilink"
+<a href="#900d0000---second-timer" class="wikilink"
 title="Second timer">Second timer</a>.
 
 ## 90020000 - Serial UART
@@ -123,7 +123,7 @@ A Faraday FTADCC010.
 ## 900C0000 - First timer
 
 Same port structure as
-<a href="#900D0000_-_Second_timer" class="wikilink"
+<a href="#900d0000---second-timer" class="wikilink"
 title="Second timer">Second timer</a>.
 
 ## 900D0000 - Second timer
@@ -188,17 +188,17 @@ A new "Aladdin PMU" unit. Not much known.
 - 90140050 (R/W): Disable bus access to peripherals. Reads will just
   return the last word read from anywhere in the address range, and
   writes will be ignored.
-  - Bit 9: <a href="#C8010000_-_Triple_DES_encryption" class="wikilink"
+  - Bit 9: <a href="#c8010000---triple-des-encryption" class="wikilink"
     title="#C8010000 - Triple DES encryption">#C8010000 - Triple DES
     encryption</a>
   - Bit 10:
-    <a href="#CC000000_-_SHA-256_hash_generator" class="wikilink"
+    <a href="#cc000000---sha-256-hash-generator" class="wikilink"
     title="#CC000000 - SHA-256 hash generator">#CC000000 - SHA-256 hash
     generator</a>
-  - Bit 13: <a href="#90060000_-_Watchdog_timer" class="wikilink"
+  - Bit 13: <a href="#90060000---watchdog-timer" class="wikilink"
     title="#90060000 - Watchdog timer">#90060000 - Watchdog timer</a>
     (?)
-  - Bit 26: <a href="#90050000_-_I2C_controller" class="wikilink"
+  - Bit 26: <a href="#90050000---i2c-controller" class="wikilink"
     title="#90050000 - I2C controller">#90050000 - I2C controller</a>
     (?)
 
