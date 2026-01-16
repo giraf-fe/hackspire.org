@@ -1,5 +1,5 @@
 ---
-title: Memory-mapped IO ports on CX II
+title: Memory-mapped I/O ports on CX II
 permalink: /Memory-mapped_IO_ports_on_CX_II/
 parent: Memory-mapped I/O ports
 layout: page
@@ -28,8 +28,10 @@ See <a href="/GPIO_Pins" class="wikilink" title="GPIO Pins">GPIO Pins</a>
 ## 90010000 - Fast timer
 
 The same interface as 900C0000/900D0000, see
-<a href="#900D0000_-_Second_timer" class="wikilink"
+<a href="#900d0000---second-timer" class="wikilink"
 title="Second timer">Second timer</a>.
+
+For this timer, the configurable speed register defaults to no bits set.
 
 ## 90020000 - Serial UART
 
@@ -123,13 +125,29 @@ A Faraday FTADCC010.
 ## 900C0000 - First timer
 
 Same port structure as
-<a href="#900D0000_-_Second_timer" class="wikilink"
-title="Second timer">Second timer</a>.
+<a href="#900d0000---second-timer" class="wikilink"
+title="Second timer">Second timer</a>. 
+
+For this timer, the configurable speed register defaults to bit 0 set.
 
 ## 900D0000 - Second timer
 
 Timer is a
-[SP804](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0271d/Babehiha.html).
+[SP804](https://developer.arm.com/documentation/ddi0271/latest/) with an
+additional speed control register at +0x80.
+
+- 900D0080 (R/W): Speed control register
+  - Bits 0-1: Speed mode
+    - No bits set: Fastest, runs at the APB clock frequency, typically
+      99MHz on the CX II.
+    - Bit 0 set: Runs at 12MHz(?).
+    - Bit 1 set: Runs at 32768Hz(?). This bit takes priority over bit 0.
+
+For this timer, the configurable speed register defaults to bit 1 set.
+
+The Ndless SDK uses this timer for its implementation of msleep. Configuring
+the speed control register to something other than the default will cause
+msleep to not work correctly.
 
 ## 900E0000 - Keypad controller
 
@@ -188,17 +206,17 @@ A new "Aladdin PMU" unit. Not much known.
 - 90140050 (R/W): Disable bus access to peripherals. Reads will just
   return the last word read from anywhere in the address range, and
   writes will be ignored.
-  - Bit 9: <a href="#C8010000_-_Triple_DES_encryption" class="wikilink"
+  - Bit 9: <a href="#c8010000---triple-des-encryption" class="wikilink"
     title="#C8010000 - Triple DES encryption">#C8010000 - Triple DES
     encryption</a>
   - Bit 10:
-    <a href="#CC000000_-_SHA-256_hash_generator" class="wikilink"
+    <a href="#cc000000---sha-256-hash-generator" class="wikilink"
     title="#CC000000 - SHA-256 hash generator">#CC000000 - SHA-256 hash
     generator</a>
-  - Bit 13: <a href="#90060000_-_Watchdog_timer" class="wikilink"
+  - Bit 13: <a href="#90060000---watchdog-timer" class="wikilink"
     title="#90060000 - Watchdog timer">#90060000 - Watchdog timer</a>
     (?)
-  - Bit 26: <a href="#90050000_-_I2C_controller" class="wikilink"
+  - Bit 26: <a href="#90050000---i2c-controller" class="wikilink"
     title="#90050000 - I2C controller">#90050000 - I2C controller</a>
     (?)
 
